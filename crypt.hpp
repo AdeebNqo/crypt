@@ -80,7 +80,40 @@ namespace mhlzol004{
 				);
 			};
 			void decode(std::istream &in, std::ostream &out){
-				std::cout << "ceaser's decode() called!" << std::endl;
+				//iterators for input stream
+                                std::istream_iterator<char> curr_pos(in);
+                                std::istream_iterator<char> end;
+                                //iterator for output stream
+                                std::ostream_iterator<char> output_pos(out,"");
+                                //fancy algorithm
+                                std::transform(curr_pos,end,output_pos,
+                                        [this](char c)->char{
+                                                int ascci_code = (unsigned char) c;
+                                                char curr_char = c;
+                                                //upper case
+                                                if (ascci_code<91 && ascci_code > 64){
+                                                        ascci_code-=65;
+                                                        ascci_code+=(-key);
+							while(ascci_code<0){
+								ascci_code += 26;
+							}
+                                                        ascci_code +=65;
+                                                        curr_char = ascci_code;
+                                                }
+                                                //lower case
+                                                else if (ascci_code>96 && ascci_code<123){
+							ascci_code -= 97;
+                                                        ascci_code += (-key);
+							while(ascci_code < 0){
+								ascci_code += 26;
+							}
+                                                        ascci_code +=97;
+                                                        curr_char = ascci_code;
+                                                }
+                                                return curr_char;
+                                        }
+                                );
+
 			};
 	};
 
