@@ -48,7 +48,7 @@ namespace mhlzol004{
 	Functor for the Vignere cipher
 	
 	*/
-	class confuse{
+	class vig_encrypt{
 		public:
 			char vig_matrix[26][26] = {
 
@@ -97,7 +97,6 @@ namespace mhlzol004{
 					y -= 65;
 				}
 				else if (y>96 && y< 123){
-					upper_case = 0;
 					y -= 97;
 				}
 				if (upper_case==0){

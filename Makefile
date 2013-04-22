@@ -1,4 +1,3 @@
-#
 # Makefile for crypt project
 # Zola Mahlaza
 #

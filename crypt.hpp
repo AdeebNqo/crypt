@@ -13,6 +13,7 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #define _CRYPT
 #include<iostream>
 #include "cipher.hpp"
+#include "functor.hpp"
 #include<string>
 #include<sstream>
 #include<iterator>
@@ -141,13 +142,24 @@ namespace mhlzol004{
 	class crypt<Vignere, P, G>{
 		public:
 			std::string key;
+			vig_encrypt *v;
 			crypt(std::string k):key(k){
 				std::cout << "vignere's crypt created!" << std::endl;
+				v = new vig_encrypt;
 			};
 			~crypt(){
 				std::cout << "vignere's crypt destroyed!" << std::endl;
 			};
 			void encode(std::istream &in, std::ostream &out){
+				int key_size = key.size();
+				int key_pos = 0; //position in key since we can wrap around
+				std::istream_iterator<char> curr_pos(in);
+				std::istream_iterator<char> end_of_istream;
+				while(curr_pos!=end_of_istream){
+					std::cout << (*v)(*curr_pos,key[key_pos%key_size]) << std::endl;
+					++key_pos;
+					++curr_pos;
+				}
 				std::cout << "vignere's encode called!" << std::endl;
 			};
 			void decode(std::istream &in, std::ostream &out){
