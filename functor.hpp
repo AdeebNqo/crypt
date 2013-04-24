@@ -172,5 +172,21 @@ namespace mhlzol004{
 				return vig_matrix[x][0];
 			}
 	};
+
+	/*
+	Functor for the XOR cipher
+	
+	*/
+	class xor_funct{
+		public:
+			int key;
+			xor_funct(int k):key(k){}
+			char operator()(const char &plain){
+				int plain_int = plain;
+				char tmp(key xor plain_int);
+				char* char_ptr = &tmp;
+				return *char_ptr;
+			}
+	};
 }
 #endif

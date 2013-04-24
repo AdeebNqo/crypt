@@ -7,7 +7,7 @@
 int main(int args, char** argv){
 	using namespace mhlzol004;
 	std::string key("LEMON");
-	crypt<Vignere, bool, bool> c(key);
+	crypt<Xor, bool, bool> c(6);
 	//std::ofstream output("decode.txt");
 	c.decode(std::cin, std::cout);
 	//vig_encrypt k;

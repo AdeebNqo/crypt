@@ -18,6 +18,7 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #include<sstream>
 #include<iterator>
 #include<algorithm>
+#include<cstdint>
 namespace mhlzol004{
 	//general crypt
 	template<class C, class P, class G>
@@ -48,6 +49,9 @@ namespace mhlzol004{
 				ss >> key;
 				std::cout << "ceaser's crypt created!" << std::endl;
 			};
+			crypt(int k):key(k){
+				std::cout << "ceaser's crypt really created!" << std::endl;
+			}
 			~crypt(){
 				std::cout << "ceaser's crypt destroyed!" << std::endl;
 			};
@@ -122,17 +126,33 @@ namespace mhlzol004{
 	template<class P, class G>
 	class crypt<Xor, P, G>{
 		public:
-			std::string key;
-			crypt(std::string k):key(k){
+			xor_funct *x_worker;
+			crypt(std::string k){
+				int key;
+				std::stringstream ss(k);
+				ss >> key;
+				x_worker = new xor_funct(key);
 				std::cout << "xor's crypt created!" << std::endl;
 			};
+			crypt(int32_t key){
+				x_worker = new xor_funct(key);
+                                std::cout << "xor's crypt really created!" << std::endl;
+			};
 			~crypt(){
+				delete x_worker;
 				std::cout << "xor's crypt destroyed!" <<std::endl;
 			};
 			void encode(std::istream &in, std::ostream &out){
+				std::istream_iterator<char> curr_pos(in);
+				std::istream_iterator<char> end_of_input;
+				std::ostream_iterator<char> output_it(out,"");
+				
+				//applying the xor_funct functor
+				std::transform(curr_pos,end_of_input,output_it,*x_worker);	
 				std::cout << "xor's decode called!" << std::endl;
 			};
 			void decode(std::istream &in, std::ostream &out){
+				encode(in,out);
 				std::cout << "xor's decode called!" << std::endl;
 			};
 	};
