@@ -82,7 +82,7 @@ namespace mhlzol004{
 			};
 			int x;
 			int y;
-			char operator()(char plain, char key){
+			char operator()(const char &plain,const char &key){
 				x = plain;
 				y = key;
 				int upper_case  = 1;
@@ -103,6 +103,73 @@ namespace mhlzol004{
 					return tolower(vig_matrix[x][y]);		
 				}
 				return vig_matrix[x][y];
+			}
+	};
+	
+	/*
+	Functor for decrypting the Vignere cipher
+	
+	*/
+	class vig_decrypt{
+		public:
+			char vig_matrix[26][26] = {
+ 
+                         {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'},
+                         {'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A'},
+                         {'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B'},
+                         {'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C'},
+                         {'E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D'},
+                         {'F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E'},
+                         {'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F'},
+                         {'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G'},
+                         {'I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H'},
+                         {'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I'},
+                         {'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J'},
+                         {'L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K'},
+                         {'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L'},
+                         {'N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M'},
+                         {'O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N'},
+                         {'P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'},
+                         {'Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'},
+                         {'R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q'},
+                         {'S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R'},
+                         {'T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'},
+                         {'U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T'},
+                         {'V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U'},
+                         {'W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'},
+                         {'X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W'},
+                         {'Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X'},
+                         {'Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'}
+ 
+                         };
+			int x; int y;
+			char operator()(const char &ciphertext,const char &key){
+				x = ciphertext;
+                                y = key;
+                                int upper_case  = 1;
+                                if (x<91 && x>64){
+                                         x -= 65;
+                                }
+                                else if (x>96 && x< 123){
+                                        upper_case = 0;
+                                        x -= 97;
+                                }
+                                if (y>64 && y<91){
+                                        y -= 65;
+                                }
+                                else if (y>96 && y< 123){
+                                        y -= 97;
+                                }
+				
+				x -= y;
+				while(x<0){
+					x+=26;
+				}
+				//change x the value of x -- it must point to the plain text char
+                                if (upper_case==0){
+                                        return tolower(vig_matrix[x][0]);
+                                }
+				return vig_matrix[x][0];
 			}
 	};
 }

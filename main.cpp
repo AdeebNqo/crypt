@@ -9,7 +9,7 @@ int main(int args, char** argv){
 	std::string key("LEMON");
 	crypt<Vignere, bool, bool> c(key);
 	//std::ofstream output("decode.txt");
-	c.encode(std::cin, std::cout);
+	c.decode(std::cin, std::cout);
 	//vig_encrypt k;
 	//std::cout << k('T','E') << std::endl;
 }
