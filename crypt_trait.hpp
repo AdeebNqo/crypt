@@ -26,7 +26,7 @@ namespace mhlzol004{
 			typedef std::string key_type_t;
 			static std::string key;
 	};
-	//template<class C> std::string crypt_trait<C>::key = NULL;
+	template<class C> std::string crypt_trait<C>::key("");
 	/*
 
 	The key type for the ceaser cipher
@@ -62,6 +62,6 @@ namespace mhlzol004{
 			typedef std::string key_value_t;
 			static std::string key;
 	};
-	//std::string crypt_trait<Vignere>::key = NULL;
+	std::string crypt_trait<Vignere>::key("");
 }
 #endif
