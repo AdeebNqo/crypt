@@ -20,13 +20,24 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #include<algorithm>
 #include<cstdint>
 #include "crypt_policy.hpp"
+#include "crypt_trait.hpp"
 namespace mhlzol004{
 	//general crypt
-	template<class C, class P, class G>
+	template<typename C, class P, class G>
 	class crypt{
 		public:
-			std::string key;
-			crypt(std::string k):key(k){
+			typedef typename crypt_trait<C>::key_value_t T; //getting the appropriate type for the key
+			T crypt_key; //defining the key with the Cipher specific type
+			/*
+
+			Implementations for the all the appropriate methods
+			
+			*/
+			crypt(T x){
+				crypt_key = x;
+				std::cout << "before assigning key" << std::endl;
+				crypt_trait<C>::key = 1;// crypt_key;
+				std::cout << crypt_trait<C>::key << std::endl;	
 				std::cout << "crypt created!" <<std::endl;
 			};
 			~crypt(){
@@ -37,6 +48,7 @@ namespace mhlzol004{
 				std::cout << "encode() called!" << std::endl;
 			};
 			void decode(std::istream &in, std::ostream &out){
+				crypt_policy<C,P,G>::encode(in,out);
 				std::cout << "decode() called!" << std::endl;
 			};
 	};
