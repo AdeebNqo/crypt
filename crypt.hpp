@@ -19,6 +19,7 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #include<iterator>
 #include<algorithm>
 #include<cstdint>
+#include "crypt_policy.hpp"
 namespace mhlzol004{
 	//general crypt
 	template<class C, class P, class G>
@@ -32,15 +33,17 @@ namespace mhlzol004{
 				std::cout << "crypt destroyed!" << std::endl;
 			};
 			void encode(std::istream &in, std::ostream &out){
+				crypt_policy<C,P,G>::encode(in,out);
 				std::cout << "encode() called!" << std::endl;
 			};
 			void decode(std::istream &in, std::ostream &out){
 				std::cout << "decode() called!" << std::endl;
 			};
 	};
-
+/*
 	//ceaser's cipher specilization
 	template<class P, class G>
+	class crypt<Ceaser, true , false>{
 	class crypt<Ceaser, P, G>{
 		public:
 			int key;
@@ -199,5 +202,7 @@ namespace mhlzol004{
 				std::cout << "vignere's decode called!" << std::endl;
 			};
 	};
+
+*/
 }
 #endif

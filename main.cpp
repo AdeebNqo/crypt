@@ -6,10 +6,11 @@
 #include "functor.hpp"
 int main(int args, char** argv){
 	using namespace mhlzol004;
-	std::string key("LEMON");
-	crypt<Xor, bool, bool> c(6);
+	std::cout << "Hello World!" << std::endl;
+	//std::string key("LEMON");
+	//crypt<Xor, bool, bool> c(6);
 	//std::ofstream output("decode.txt");
-	c.decode(std::cin, std::cout);
+	//c.decode(std::cin, std::cout);
 	//vig_encrypt k;
 	//std::cout << k('T','E') << std::endl;
 }
