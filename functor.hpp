@@ -175,7 +175,8 @@ namespace mhlzol004{
 
 	/*
 	Functor for the XOR cipher
-	
+	-deprecated--
+	Not what was needed, this was too simple
 	*/
 	class xor_funct{
 		public:
@@ -188,5 +189,13 @@ namespace mhlzol004{
 				return *char_ptr;
 			}
 	};
+	/*
+	xor_it
+	Functor for the xor cipher
+	
+	*/
+	class xor_it{
+		
+	}
 }
 #endif
