@@ -10,6 +10,7 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #ifndef _FUNCTOR
 #define _FUNCTOR
 #include<locale>
+#include<bitset>
 namespace mhlzol004{
 	/*
 
@@ -195,7 +196,13 @@ namespace mhlzol004{
 	
 	*/
 	class xor_it{
-		
-	}
+		public:
+			int curr_pos;
+			std::bitset<32> key;
+			xor_it(int32_t p_key){
+				std::cout << p_key << std::endl;
+				std::cout << key(p_key) << std::endl;
+			}	
+	};
 }
 #endif

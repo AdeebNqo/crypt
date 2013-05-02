@@ -7,8 +7,10 @@
 int main(int args, char** argv){
 	using namespace mhlzol004;
 	std::cout << "Hello World!" << std::endl;
-	std::string key("LEMON");
-	crypt<Xor, bool, bool> c(1);
+	int32_t x = 12;
+	xor_it X(x);
+	//std::string key("LEMON");
+	//crypt<Xor, bool, bool> c(1);
 	//std::ofstream output("decode.txt");
 	//c.decode(std::cin, std::cout);
 	//vig_encrypt k;
