@@ -7,7 +7,7 @@
 int main(int args, char** argv){
 	using namespace mhlzol004;
 	std::cout << "Hello World!" << std::endl;
-	int32_t x = 12;
+	int32_t x = 156;
 	xor_it X(x);
 	//std::string key("LEMON");
 	//crypt<Xor, bool, bool> c(1);

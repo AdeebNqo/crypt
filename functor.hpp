@@ -11,6 +11,8 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #define _FUNCTOR
 #include<locale>
 #include<bitset>
+#include<sstream>
+#include<algorithm>
 namespace mhlzol004{
 	/*
 
@@ -201,7 +203,25 @@ namespace mhlzol004{
 			std::bitset<32> key;
 			xor_it(int32_t p_key){
 				std::cout << p_key << std::endl;
-				std::cout << key(p_key) << std::endl;
+				std::stringstream stream;
+				while(1){
+					if (p_key==1){
+						stream << 1 ;
+						break;
+					}
+					else{
+						stream << p_key%2 ;
+						p_key /= 2;
+					}
+				}
+				std::string key_string;
+				stream >> key_string;
+				std::reverse(key_string.begin(), key_string.end());
+				key = std::bitset<32>(key_string);
+				std::cout << key << std::endl;
+			}
+			char operator()(const char &plain){
+				
 			}	
 	};
 }
