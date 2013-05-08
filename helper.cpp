@@ -54,5 +54,10 @@ namespace mhlzol004{
 			}
 		}
 	}
+	/*
+	function for packing characters
+	*/
+	void pack(std::istream &in, std::ostream &out){
+		
+	}
 }
-
