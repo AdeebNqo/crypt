@@ -14,6 +14,7 @@ http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejec
 #ifndef _CRYPT_POLICY
 #define	_CRYPT_POLICY
 #include<iterator>
+#include<iostream>
 #include "functor.hpp"
 #include "cipher.hpp"
 #include "crypt_trait.hpp"
@@ -34,13 +35,16 @@ namespace mhlzol004{
 				std::istream_iterator<char> end;
 				std::istream_iterator<char> curr_pos(in);
 				std::ostream_iterator<char> output(out, "");
-				
+				in.unsetf(std::ios::skipws);
+
 				int key = crypt_trait<Ceaser>::key;
-				std::cout << "key : " << key << std::endl;
 				std::transform(curr_pos,end,output,
 					[&key](char c)->char{
 						int ascci_code = (unsigned char) c;
 						char curr_char = c;
+						if (curr_char==' '){
+							return ' ';
+						}
 						//upper case
 						if (ascci_code<91 && ascci_code > 64){
 							ascci_code-=65;
@@ -64,12 +68,17 @@ namespace mhlzol004{
 				std::istream_iterator<char> end;
 				std::istream_iterator<char> curr_pos(in);
 				std::ostream_iterator<char> output(out, "");
-				
+				in.unsetf(std::ios::skipws);
+
 				int key = crypt_trait<Ceaser>::key;
 				std::transform(curr_pos,end,output,
 					[&key](char c)->char{
 						int ascci_code = (unsigned char) c;
 						char curr_char = c;
+						//space
+						if (curr_char==' '){
+							return ' ';
+						}
 						//upper case
 						if (ascci_code<91 && ascci_code > 64){
 							ascci_code-=65;
@@ -105,7 +114,7 @@ namespace mhlzol004{
 	class crypt_policy<Vignere, P, G>{
 		public:
 			static void encode(std::istream &in, std::ostream &out){
-
+				
 			};
 			static void decode(std::istream &in, std::ostream &out){
 
