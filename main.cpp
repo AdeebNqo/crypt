@@ -33,8 +33,25 @@ int main(int args, char** argv){
 	
 	std::istream *in;
 	std::ostream *out;
+
+	
 	if (cipher=="xor"){
 		mhlzol004::crypt<Xor,bool,bool> enigma(parser.get_key<int32_t>());
+		
+		//initialise whether to pack and group
+		if (enable_packing>0){
+			crypt_trait<Xor>::pack = true;
+		}
+		else if (enable_packing<=0){
+			crypt_trait<Xor>::pack = false;
+		}
+		if (enable_grouping>0){
+			crypt_trait<Xor>::group = true;
+		}
+		else if (enable_grouping<=0){
+			crypt_trait<Xor>::group = false;
+		}
+
 		//if input filename has not provided
 		
 		//if the input file option is not given as an cmd arg
@@ -78,6 +95,21 @@ int main(int args, char** argv){
 	}
 	else if (cipher=="ceaser"){
 		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());
+
+		//initialise whether to pack and group
+		if (enable_packing>0){
+			crypt_trait<Ceaser>::pack = true;
+		}
+		else if (enable_packing<=0){
+			crypt_trait<Ceaser>::pack = false;
+		}
+		if (enable_grouping>0){
+			crypt_trait<Ceaser>::group = true;
+		}
+		else if (enable_grouping<=0){
+			crypt_trait<Ceaser>::group = false;
+		}
+
 		//if input filename has not provided
 		if (parser.input_file()<1){
 			in = &std::cin;
@@ -114,6 +146,21 @@ int main(int args, char** argv){
 	}
 	else if (cipher=="vignere"){
 		mhlzol004::crypt<Vignere,bool,bool> enigma(parser.get_key<std::string>());
+
+		//initialise whether to pack and group
+		if (enable_packing>0){
+			crypt_trait<Vignere>::pack = true;
+		}
+		else if (enable_packing<=0){
+			crypt_trait<Vignere>::pack = false;
+		}
+		if (enable_grouping>0){
+			crypt_trait<Vignere>::group = true;
+		}
+		else if (enable_grouping<=0){
+			crypt_trait<Vignere>::group = false;
+		}
+
 		//if input filename has not provided
 		if (parser.input_file()<1){
 			in = &std::cin;

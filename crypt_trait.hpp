@@ -25,6 +25,8 @@ namespace mhlzol004{
 		public:
 			typedef std::string key_type_t;
 			static std::string key;
+			static bool group;
+			static bool pack;
 	};
 	template<class C> std::string crypt_trait<C>::key("");
 	/*
@@ -37,6 +39,8 @@ namespace mhlzol004{
 		public:
 			typedef int key_value_t;
 			static int key;
+			static bool group;
+			static bool pack;
 	};
 	int crypt_trait<Ceaser>::key = 0;
 	/*
@@ -49,6 +53,8 @@ namespace mhlzol004{
 		public:
 			typedef int32_t key_value_t;
 			static int32_t key;
+			static bool group;
+			static bool pack;
 	};
 	int32_t crypt_trait<Xor>::key = 0;
 	/*
@@ -61,6 +67,8 @@ namespace mhlzol004{
 		public:
 			typedef std::string key_value_t;
 			static std::string key;
+			static bool group;
+			static bool pack;
 	};
 	std::string crypt_trait<Vignere>::key("");
 }
