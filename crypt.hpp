@@ -35,9 +35,7 @@ namespace mhlzol004{
 			*/
 			crypt(T x){
 				crypt_key = x;
-				std::cout << "before assigning key" << std::endl;
-				crypt_trait<C>::key = 1;// crypt_key;
-				std::cout << crypt_trait<C>::key << std::endl;	
+				std::cout << "(crypt constructor) key: "<<x<<std::endl;
 				std::cout << "crypt created!" <<std::endl;
 			};
 			~crypt(){

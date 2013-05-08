@@ -201,8 +201,8 @@ namespace mhlzol004{
 		public:
 			int curr_pos;
 			std::bitset<32> key;
-			xor_it(int32_t p_key){
-				std::cout << p_key << std::endl;
+			xor_it(int32_t p_key):curr_pos(0){
+				std::cout <<"public key: " <<p_key << std::endl;
 				std::stringstream stream;
 				while(1){
 					if (p_key==1){
@@ -218,10 +218,21 @@ namespace mhlzol004{
 				stream >> key_string;
 				std::reverse(key_string.begin(), key_string.end());
 				key = std::bitset<32>(key_string);
-				std::cout << key << std::endl;
+				std::cout << "key:      " << key << std::endl;
 			}
 			char operator()(const char &plain){
-				
+				std::bitset<8> char_bits(plain);
+				for (int i=0;i<8;(++curr_pos)%32, ++i){
+					char_bits[i] = char_bits[i] ^ key[curr_pos];
+				}
+				curr_pos %= 32;
+				/*
+
+				Converting the bitset to the encoded char
+				*/
+				unsigned long tmp_long= char_bits.to_ulong();
+				char tmp_char  = tmp_long;
+				return tmp_char;
 			}	
 	};
 }

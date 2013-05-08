@@ -4,7 +4,7 @@
  *  Created on: 22 Feb 2012
  *      Author: simon
  */
-
+#include<cstdint>
 #include "cmdline_parser.h"
 #include<string>
 //-------------------------------------------------------------------------//
@@ -28,9 +28,9 @@ cmdline_parser::cmdline_parser(void) : vm(), od("Options")
 		("decode,d","decode option")
 		("input,i",po::value<std::string>(),"input filename")
 		("output,o",po::value<std::string>(),"output filename")
-		(",x",po::value<int>(),"xor cipher option followed by key")
-		(",v",po::value<std::string>(),"vignere cipher followed by key")
-		(",c",po::value<int>(),"ceaser's cipher option followed by shift key")
+		("xor,x",po::value<int32_t>(),"xor cipher option followed by key")
+		("vignere,v",po::value<std::string>(),"vignere cipher followed by key")
+		("ceaser,c",po::value<int>(),"ceaser's cipher option followed by shift key")
 		("group,g","enable grouping")
 		("pack,p","enable packing");
 };
@@ -65,32 +65,21 @@ std::string cmdline_parser::get_database_filename(void) const
 	return vm["database-file"].as<std::string>();
 }
 std::string cmdline_parser::get_cipher(){
-	if (vm.count("x")){
+	if (vm.count("xor")>0){
 		//xor cipher is envoked
 		return std::string("xor");
 	}
-	else if (vm.count("v")){
+	else if (vm.count("vignere")>0){
+		//vignere cipher is envoked
 		return std::string("vignere");
 	}
-	else if (vm.count("c")){
-		//ceaser
+	else if (vm.count("ceaser")>0){
+		//ceaser is envoked
 		return std::string("ceaser");
 	}
+	return "";
 }
-std::string cmdline_parser::get_key(){
-         if (vm.count("x")){
-                //xor cipher
-		return vm["x"].as<std::string>();
-         }
-         else if (vm.count("v")){
- 		//vig
-		return vm["v"].as<std::string>();
-         }
-         else if (vm.count("c")){
- 		//ceaser
-		return vm["c"].as<std::string>();
-         }
-}
+
 bool cmdline_parser::encode(){
 	return vm.count("encode");
 }

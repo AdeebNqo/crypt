@@ -35,7 +35,25 @@ public:
 	int enable_grouping();
 	std::string get_input_filename();
 	std::string get_output_filename();
-	std::string get_key();
+	template<typename T>
+	T get_key(){
+		if (vm.count("xor")){
+                	//xor cipher
+			T tmp = vm["xor"].as<T>();
+			return tmp;
+         	}
+         	else if (vm.count("vignere")){
+ 			//vig
+			T tmp = vm["vignere"].as<T>();
+        		return tmp; 
+		}
+        	else if (vm.count("ceaser")){
+ 			//ceaser
+			T tmp = vm["ceaser"].as<T>();
+        		return tmp;
+		}
+		return T();		
+		}
 	std::string get_cipher();
 
 private:
