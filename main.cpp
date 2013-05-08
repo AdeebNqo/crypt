@@ -60,7 +60,9 @@ int main(int args, char** argv){
 			std::ofstream* outfile = new std::ofstream(output_filename);
 			out = outfile;
 		}
-		
+		if (encode>0){
+			enigma.encode(*in,*out);
+		}
 	}
 	else if (cipher=="ceaser"){
 		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());	
