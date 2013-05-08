@@ -28,6 +28,7 @@ namespace mhlzol004{
 			char *x;
 			shift(int shift_key):shift_k(shift_key){}
 			char operator()(const char & value){
+				std::cout << "(" << value << ")" << std::endl;
 				int ascci_code = (unsigned char) value;
 				//if the letter is upper case
 				if (ascci_code<91 && ascci_code > 64){

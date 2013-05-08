@@ -32,7 +32,6 @@ namespace mhlzol004{
 			~crypt(){
 			};
 			void encode(std::istream &in, std::ostream &out){
-				std::cout << "encode in crypt called!" << std::endl;
 				crypt_policy<C,P,G>::encode(in,out);
 			};
 			void decode(std::istream &in, std::ostream &out){
