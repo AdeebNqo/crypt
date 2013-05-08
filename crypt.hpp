@@ -34,11 +34,11 @@ namespace mhlzol004{
 			};
 			void encode(std::istream &in, std::ostream &out){
 				crypt_policy<C,P,G>::encode(in,out);
-				out << std::endl;
+				//out << std::endl;
 			};
 			void decode(std::istream &in, std::ostream &out){
 				crypt_policy<C,P,G>::encode(in,out);
-				out << std::endl;
+				//out << std::endl;
 			};
 	};
 /*

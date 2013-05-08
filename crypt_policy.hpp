@@ -15,6 +15,7 @@ http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejec
 #define	_CRYPT_POLICY
 #include<iterator>
 #include<iostream>
+#include "helper.hpp"
 #include "functor.hpp"
 #include "cipher.hpp"
 #include "crypt_trait.hpp"
@@ -42,9 +43,6 @@ namespace mhlzol004{
 					[&key](char c)->char{
 						int ascci_code = (unsigned char) c;
 						char curr_char = c;
-						if (curr_char==' '){
-							return ' ';
-						}
 						//upper case
 						if (ascci_code<91 && ascci_code > 64){
 							ascci_code-=65;
@@ -126,8 +124,13 @@ namespace mhlzol004{
 
 				std::transform(curr_pos,end,output,
 				[&key, &pos, &key_size, &vig_enc] (char plain_char)->char{
-						++pos; pos %= key_size;
-						return vig_enc(plain_char,key[pos]);
+						if (is_letter(plain_char)){
+							++pos; pos %= key_size;
+							return vig_enc(plain_char,key[pos]);
+						}
+						else{
+							return plain_char;
+						}
 					}
 				);
 
@@ -145,11 +148,13 @@ namespace mhlzol004{
 
 				std::transform(curr_pos,end,output,
 				[&key, &pos, &key_size, &vig_de] (char encr_char)->char{
-						if (encr_char==' '){
-							return ' ';
+						if (is_letter(encr_char)){
+							++pos; pos %= key_size;
+							return vig_de(encr_char,key[pos]);
 						}
-						++pos; pos %= key_size;
-						return vig_de(encr_char,key[pos]);
+						else{
+							return encr_char;
+						}
 					}
 				);
 			};
