@@ -36,17 +36,22 @@ namespace mhlzol004{
 		out.unsetf(std::ios::skipws);
 		in.unsetf(std::ios::skipws);
 		while(in_curr!=in_end){
-			if (count != 0 && count%5==0){
-				*out_it = ' ';
-				++out_it;
-				count = -1;
+			if (*in_curr == ' '){
+				++in_curr;
 			}
 			else{
-				*out_it = *in_curr;
-				++in_curr;
-				++out_it;
+				if (count != 0 && count%5==0){
+					*out_it = ' ';
+					++out_it;
+					count = -1;
+				}
+				else{
+					*out_it = *in_curr;
+					++in_curr;
+					++out_it;
+				}
+				++count;
 			}
-			++count;
 		}
 	}
 }

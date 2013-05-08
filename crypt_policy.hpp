@@ -101,10 +101,31 @@ namespace mhlzol004{
 	class crypt_policy<Xor, P, G>{
 		public:
 			static void encode(std::istream &in, std::ostream &out){
+				int pos = 0;
+				std::ostream_iterator<char> out_it(out, "");
+				std::istream_iterator<char> end;
+				std::istream_iterator<char> curr_pos(in);
+				std::bitset<32> key_bits(crypt_trait<Xor>::key);
 
+				transform(curr_pos, end, out_it,
+					[&pos, &key_bits] (char plain_char)->char{
+						std::bitset<8> plain_bits(plain_char);
+						
+						int len = pos+8;
+						int j=0;
+						for (int i=pos;i<len;++i, ++j, ++pos){
+							if (i>=32){
+								i%=32;
+							}
+							plain_bits[j] = plain_bits[j] ^ key_bits[i];
+						}
+						pos %= 32;
+						char ciphered_char = (unsigned) plain_bits.to_ulong();
+					}
+				);
 			};
 			static void decode(std::istream &in, std::ostream &out){
-				
+				encode(in,out);
 			};
 	};
 	//vignere policy

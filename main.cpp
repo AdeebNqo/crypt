@@ -74,13 +74,15 @@ int main(int args, char** argv){
 					std::ofstream* outfile = new std::ofstream(output_filename);
 					out = outfile;
 				}
-				if (encode>0){
-					enigma.encode(*in,*out);
-				}
-				if (decode >0){
-					enigma.decode(*in, *out);
-				}
 			}
+			
+		if (encode>0){
+			enigma.encode(*in,*out);
+		}
+		if (decode >0){
+			enigma.decode(*in, *out);
+		}
+			
 	}
 	else if (cipher=="ceaser"){
 		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());
@@ -158,10 +160,4 @@ int main(int args, char** argv){
 			enigma.decode(*in, *out);
 		}
 	}
-	std::stringstream ss;
-	std::ifstream myfile("test.txt");
-	group(myfile,ss);
-	std::istreambuf_iterator<char> eos;
-	std::string tmp(std::istreambuf_iterator<char>(ss), eos);
-	std::cout << tmp << std::endl;
 }
