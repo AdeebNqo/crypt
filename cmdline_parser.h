@@ -31,6 +31,8 @@ public:
 	void print_help(std::ostream & out) const;
 	bool encode();
 	bool decode();
+	int input_file();
+	int output_file();
 	int enable_packing();
 	int enable_grouping();
 	std::string get_input_filename();

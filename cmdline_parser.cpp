@@ -86,6 +86,12 @@ bool cmdline_parser::encode(){
 bool cmdline_parser::decode(){
 	return vm.count("decode");
 }
+int cmdline_parser::input_file(){
+	return vm.count("input");
+}
+int cmdline_parser::output_file(){
+	return vm.count("output");
+}
 int cmdline_parser::enable_packing(){
 	return vm.count("pack");
 }

@@ -43,31 +43,117 @@ int main(int args, char** argv){
 		mhlzol004::crypt<Xor,bool,bool> enigma(parser.get_key<int32_t>());
 		//if input filename has not provided
 		std::istream *in;
-		if (input_filename==""){
+			//if the input file option is not given as an cmd arg
+			if (parser.input_file()<1){
+				//input file will not be given
+				in = &std::cin;
+			}
+			else{
+				if (input_filename==""){
+					in = &std::cin;
+				}
+				else if (input_filename!=""){
+					std::ifstream* infile = new std::ifstream(input_filename);
+					in = infile;
+				}
+			}
+
+		//if input filename has not provided
+		std::ostream *out;
+			//if the output file option is not given as an cmd arg
+			if (parser.output_file()<1){
+				out = &std::cout;
+			}
+			else{
+				if (output_filename==""){
+					out = &std::cout;
+				}
+				else if (output_filename!=""){
+					std::ofstream* outfile = new std::ofstream(output_filename);
+					out = outfile;
+				}
+				if (encode>0){
+					enigma.encode(*in,*out);
+				}
+				if (decode >0){
+					enigma.decode(*in, *out);
+				}
+			}
+	}
+	else if (cipher=="ceaser"){
+		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());
+		//if input filename has not provided
+		std::istream *in;
+		if (parser.input_file()<1){
 			in = &std::cin;
 		}
-		else if (input_filename!=""){
-			std::ifstream* infile = new std::ifstream(input_filename);
-			in = infile;
+		else {
+			if (input_filename==""){
+				in = &std::cin;
+			}
+			else if (input_filename!=""){
+				std::ifstream* infile = new std::ifstream(input_filename);
+				in = infile;
+			}
 		}
 
 		//if input filename has not provided
 		std::ostream *out;	
-		if (output_filename==""){
+		if (parser.output_file()<1){
 			out = &std::cout;
 		}
-		else if (output_filename!=""){
-			std::ofstream* outfile = new std::ofstream(output_filename);
-			out = outfile;
+		else{
+			if (output_filename==""){
+				out = &std::cout;
+			}
+			else if (output_filename!=""){
+				std::ofstream* outfile = new std::ofstream(output_filename);
+				out = outfile;
+			}
 		}
 		if (encode>0){
 			enigma.encode(*in,*out);
 		}
-	}
-	else if (cipher=="ceaser"){
-		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());	
+		if (decode >0){
+			enigma.decode(*in, *out);
+		}
 	}
 	else if (cipher=="vignere"){
 		mhlzol004::crypt<Vignere,bool,bool> enigma(parser.get_key<std::string>());
+		//if input filename has not provided
+		std::istream *in;
+		if (parser.input_file()<1){
+			in = &std::cin;
+		}
+		else{
+			if (input_filename==""){
+				in = &std::cin;
+			}
+			else if (input_filename!=""){
+				std::ifstream* infile = new std::ifstream(input_filename);
+				in = infile;
+			}
+		}
+
+		//if input filename has not provided
+		std::ostream *out;	
+		if (parser.output_file()){
+			out = &std::cout;
+		}
+		else{
+			if (output_filename==""){
+				out = &std::cout;
+			}
+			else if (output_filename!=""){
+				std::ofstream* outfile = new std::ofstream(output_filename);
+				out = outfile;
+			}
+		}
+		if (encode>0){
+			enigma.encode(*in,*out);
+		}
+		if (decode >0){
+			enigma.decode(*in, *out);
+		}
 	}
 }

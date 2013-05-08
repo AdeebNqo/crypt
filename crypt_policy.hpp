@@ -20,8 +20,6 @@ namespace mhlzol004{
 	template<class C, class P, class G>
 	class crypt_policy{
 		public:
-			typedef typename crypt_trait<C>::key_value_t key_type;
-			key_type key;
 			static void encode(std::istream &in, std::ostream &out);
 			static void decode(std::istream &in, std::ostream &out);
 	};
@@ -29,9 +27,13 @@ namespace mhlzol004{
 	template<class P,class G>
 	class crypt_policy<Ceaser,P,G>{
 		public:
-			static void encode(std::istream &in, std::ostream &out);
+			static void encode(std::istream &in, std::ostream &out){
+				std::cout << "ceaser's cipher!" << std::endl;
+			};
 			//decoding ceaser's cipher
-			static void decode(std::istream &in, std::ostream &out);
+			static void decode(std::istream &in, std::ostream &out){
+
+			};
 	};
 	//xor policy
 	template<class P, class G>
@@ -48,8 +50,12 @@ namespace mhlzol004{
 	template<class P, class G>
 	class crypt_policy<Vignere, P, G>{
 		public:
-			static void encode(std::istream &in, std::ostream &out);
-			static void decode(std::istream &in, std::ostream &out);
+			static void encode(std::istream &in, std::ostream &out){
+
+			};
+			static void decode(std::istream &in, std::ostream &out){
+
+			};
 	};
 }
 #endif
