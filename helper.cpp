@@ -9,6 +9,7 @@ is better than C++ is like arguing that grasshoppers taste better than tree bark
 -Thant Tessman, comp.lang.scheme 
 
 */
+#include "helper.hpp"
 namespace mhlzol004{
 	/*
 	Function for determining if char is a letter
@@ -22,6 +23,32 @@ namespace mhlzol004{
 			return true;
 		}
 		return false;
+	}
+	/*
+	Function for grouping characters
+	*/
+	void group(std::istream &in, std::ostream &out){
+		int count = 0;
+		std::ostream_iterator<char> out_it(out,"");
+		
+		std::istream_iterator<char> in_end;
+		std::istream_iterator<char> in_curr(in);
+		out.unsetf(std::ios::skipws);
+		in.unsetf(std::ios::skipws);
+		int num_spaces = 0;
+		while(in_curr!=in_end){
+			if (count != 0 && count%5==0){
+				*out_it = ' ';
+				++out_it;
+				++num_spaces;
+			}
+			else{
+				*out_it = *in_curr;
+				++in_curr;
+				++out_it;
+			}
+			++count;
+		}
 	}
 }
 

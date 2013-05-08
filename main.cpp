@@ -5,6 +5,8 @@
 #include<fstream>
 #include "functor.hpp"
 #include "cmdline_parser.h"
+#include "helper.hpp"
+#include<fstream>
 int main(int args, char** argv){
 	using namespace mhlzol004;
 	std::cout << "Hello World!" << std::endl;
@@ -156,4 +158,10 @@ int main(int args, char** argv){
 			enigma.decode(*in, *out);
 		}
 	}
+	std::stringstream ss;
+	std::ifstream myfile("test.txt");
+	group(myfile,ss);
+	std::istreambuf_iterator<char> eos;
+	std::string tmp(std::istreambuf_iterator<char>(ss), eos);
+	std::cout << tmp << std::endl;
 }
