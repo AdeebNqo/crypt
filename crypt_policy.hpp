@@ -13,6 +13,8 @@ http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejec
 */
 #ifndef _CRYPT_POLICY
 #define	_CRYPT_POLICY
+#include<iterator>
+#include "functor.hpp"
 #include "cipher.hpp"
 #include "crypt_trait.hpp"
 namespace mhlzol004{
@@ -28,11 +30,23 @@ namespace mhlzol004{
 	class crypt_policy<Ceaser,P,G>{
 		public:
 			static void encode(std::istream &in, std::ostream &out){
-				std::cout << "ceaser's cipher!" << std::endl;
+				std::cout << "encode called!" << std::endl;
+
+				std::istream_iterator<char> end;
+				std::istream_iterator<char> curr_pos(in);
+				std::ostream_iterator<char> output(out, "");
+				
+				shift shifter(crypt_trait<Ceaser>::key);
+				transform(curr_pos, end, output, shifter);
 			};
 			//decoding ceaser's cipher
 			static void decode(std::istream &in, std::ostream &out){
+				std::istream_iterator<char> end;
+				std::istream_iterator<char> curr_pos(in);
+				std::ostream_iterator<char> output(out, "");
 
+				shift shifter(-crypt_trait<Ceaser>::key);
+				transform(curr_pos, end, output, shifter);
 			};
 	};
 	//xor policy

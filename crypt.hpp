@@ -12,13 +12,6 @@ http://www.gnu.org/licenses/gpl-2.0.txt
 #ifndef _CRYPT
 #define _CRYPT
 #include<iostream>
-#include "cipher.hpp"
-#include "functor.hpp"
-#include<string>
-#include<sstream>
-#include<iterator>
-#include<algorithm>
-#include<cstdint>
 #include "crypt_policy.hpp"
 #include "crypt_trait.hpp"
 namespace mhlzol004{
@@ -35,19 +28,15 @@ namespace mhlzol004{
 			*/
 			crypt(T x){
 				crypt_key = x;
-				std::cout << "(crypt constructor) key: "<<x<<std::endl;
-				std::cout << "crypt created!" <<std::endl;
 			};
 			~crypt(){
-				std::cout << "crypt destroyed!" << std::endl;
 			};
 			void encode(std::istream &in, std::ostream &out){
+				std::cout << "encode in crypt called!" << std::endl;
 				crypt_policy<C,P,G>::encode(in,out);
-				std::cout << "encode() called!" << std::endl;
 			};
 			void decode(std::istream &in, std::ostream &out){
 				crypt_policy<C,P,G>::encode(in,out);
-				std::cout << "decode() called!" << std::endl;
 			};
 	};
 /*

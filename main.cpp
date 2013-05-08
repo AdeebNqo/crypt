@@ -81,6 +81,7 @@ int main(int args, char** argv){
 			}
 	}
 	else if (cipher=="ceaser"){
+		std::cout << "ceaser" << std::endl;
 		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());
 		//if input filename has not provided
 		std::istream *in;
@@ -112,6 +113,7 @@ int main(int args, char** argv){
 			}
 		}
 		if (encode>0){
+			std::cout << " encode>0 "<<std::endl;
 			enigma.encode(*in,*out);
 		}
 		if (decode >0){
