@@ -35,12 +35,11 @@ namespace mhlzol004{
 		std::istream_iterator<char> in_curr(in);
 		out.unsetf(std::ios::skipws);
 		in.unsetf(std::ios::skipws);
-		int num_spaces = 0;
 		while(in_curr!=in_end){
 			if (count != 0 && count%5==0){
 				*out_it = ' ';
 				++out_it;
-				++num_spaces;
+				count = -1;
 			}
 			else{
 				*out_it = *in_curr;
