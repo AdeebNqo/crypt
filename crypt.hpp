@@ -28,6 +28,7 @@ namespace mhlzol004{
 			*/
 			crypt(T x){
 				crypt_key = x;
+				crypt_trait<C>::key = x;
 			};
 			~crypt(){
 			};
