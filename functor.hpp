@@ -90,21 +90,30 @@ namespace mhlzol004{
 				x = plain;
 				y = key;
 				int upper_case  = 1;
+
+				int bit = 0;
 				if (x<91 && x>64){
 					x -= 65;
+					++bit;
 				}
 				else if (x>96 && x< 123){
 					upper_case = 0;
 					x -= 97;
+					++bit;
 				}
 				if (y>64 && y<91){
 					y -= 65;
+					++bit;
 				}
 				else if (y>96 && y< 123){
 					y -= 97;
+					++bit;
 				}
 				if (upper_case==0){
 					return tolower(vig_matrix[x][y]);		
+				}
+				if (bit==0){
+					return plain;
 				}
 				return vig_matrix[x][y];
 			}
@@ -151,18 +160,23 @@ namespace mhlzol004{
 				x = ciphertext;
                                 y = key;
                                 int upper_case  = 1;
+				int bit = 0;
                                 if (x<91 && x>64){
                                          x -= 65;
+					++bit;
                                 }
                                 else if (x>96 && x< 123){
                                         upper_case = 0;
                                         x -= 97;
+					++bit;
                                 }
                                 if (y>64 && y<91){
                                         y -= 65;
+					++bit;
                                 }
                                 else if (y>96 && y< 123){
                                         y -= 97;
+					++bit;
                                 }
 				
 				x -= y;
@@ -173,6 +187,9 @@ namespace mhlzol004{
                                 if (upper_case==0){
                                         return tolower(vig_matrix[x][0]);
                                 }
+				if (bit==0){
+					return ciphertext;
+				}
 				return vig_matrix[x][0];
 			}
 	};

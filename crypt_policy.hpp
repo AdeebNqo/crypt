@@ -114,10 +114,44 @@ namespace mhlzol004{
 	class crypt_policy<Vignere, P, G>{
 		public:
 			static void encode(std::istream &in, std::ostream &out){
-				
+				std::istream_iterator<char> end;
+				std::istream_iterator<char> curr_pos(in);
+				std::ostream_iterator<char> output(out, "");
+				in.unsetf(std::ios::skipws);
+
+				std::string key = crypt_trait<Vignere>::key;
+				int key_size = key.size();
+				int pos = -1;
+				vig_encrypt vig_enc;
+
+				std::transform(curr_pos,end,output,
+				[&key, &pos, &key_size, &vig_enc] (char plain_char)->char{
+						++pos; pos %= key_size;
+						return vig_enc(plain_char,key[pos]);
+					}
+				);
+
 			};
 			static void decode(std::istream &in, std::ostream &out){
+				std::istream_iterator<char> end;
+				std::istream_iterator<char> curr_pos(in);
+				std::ostream_iterator<char> output(out, "");
+				in.unsetf(std::ios::skipws);
 
+				std::string key = crypt_trait<Vignere>::key;
+				int key_size = key.size();
+				int pos = -1;
+				vig_decrypt vig_de;
+
+				std::transform(curr_pos,end,output,
+				[&key, &pos, &key_size, &vig_de] (char encr_char)->char{
+						if (encr_char==' '){
+							return ' ';
+						}
+						++pos; pos %= key_size;
+						return vig_de(encr_char,key[pos]);
+					}
+				);
 			};
 	};
 }
