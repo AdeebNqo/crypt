@@ -59,7 +59,7 @@ To confirm that they actually exist, open `helper.cpp`. Change line 81 from
 
 2.
 
-My program works for both lower and uppercase. I was unaware that we only have to worry about upper case letters only.
+My program works for both lower and uppercase. I was unaware that we have to worry about upper case letters only.
 
 3.
 
