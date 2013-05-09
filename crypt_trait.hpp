@@ -25,10 +25,12 @@ namespace mhlzol004{
 		public:
 			typedef std::string key_type_t;
 			static std::string key;
-			static bool group;
 			static bool pack;
+			static bool group;
 	};
 	template<class C> std::string crypt_trait<C>::key("");
+	template<class C> bool crypt_trait<C>::pack = false;
+	template<class C> bool crypt_trait<C>::group = false;
 	/*
 
 	The key type for the ceaser cipher
@@ -39,10 +41,12 @@ namespace mhlzol004{
 		public:
 			typedef int key_value_t;
 			static int key;
-			static bool group;
 			static bool pack;
+			static bool group;
 	};
 	int crypt_trait<Ceaser>::key = 0;
+	bool crypt_trait<Ceaser>::pack = false;
+	bool crypt_trait<Ceaser>::group = false;
 	/*
 
 	The key type for the Xor is int32_t	
@@ -53,10 +57,12 @@ namespace mhlzol004{
 		public:
 			typedef int32_t key_value_t;
 			static int32_t key;
-			static bool group;
 			static bool pack;
+			static bool group;
 	};
 	int32_t crypt_trait<Xor>::key = 0;
+	bool crypt_trait<Xor>::pack = false;
+	bool crypt_trait<Xor>::group = false;
 	/*
 
 	The key type for the Vignere cipher is std::string
@@ -67,9 +73,11 @@ namespace mhlzol004{
 		public:
 			typedef std::string key_value_t;
 			static std::string key;
-			static bool group;
 			static bool pack;
+			static bool group;
 	};
 	std::string crypt_trait<Vignere>::key("");
+	bool crypt_trait<Vignere>::pack = false;
+	bool crypt_trait<Vignere>::group = false;
 }
 #endif

@@ -58,6 +58,24 @@ namespace mhlzol004{
 	function for packing characters
 	*/
 	void pack(std::istream &in, std::ostream &out){
-		
+		std::istream_iterator<char> end;
+		std::istream_iterator<char> curr_pos(in);
+		std::ostream_iterator<char> out_it(out);
+		std::vector<char> bytes;
+		while(curr_pos!=end){
+			char tmp = *curr_pos;
+			std::bitset<8> bits(tmp);
+			for (int i=0;i<8;i++){
+				if (i+3==8){
+					break;
+				}
+				bits[i+3] = bits[i]; bits[i] = 0;
+			}
+			//writing byte to ostream
+			char new_char = bits.to_ulong();
+			bytes.push_back(new_char);
+			++curr_pos;
+		}
+		std::copy(bytes.rbegin(), bytes.rend(), out_it);
 	}
 }
