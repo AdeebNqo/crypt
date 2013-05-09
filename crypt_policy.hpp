@@ -63,32 +63,36 @@ namespace mhlzol004{
 			};
 			//decoding ceaser's cipher
 			static void decode(std::istream &in, std::ostream &out){
-				std::istream_iterator<char> end;
+				//iterators for input stream
 				std::istream_iterator<char> curr_pos(in);
-				std::ostream_iterator<char> output(out, "");
-				in.unsetf(std::ios::skipws);
+				std::istream_iterator<char> end;
+				//iterator for output stream
+				std::ostream_iterator<char> output_pos(out,"");
 
+				//fancy stuff
 				int key = crypt_trait<Ceaser>::key;
-				std::transform(curr_pos,end,output,
+				std::transform(curr_pos,end,output_pos,
 					[&key](char c)->char{
 						int ascci_code = (unsigned char) c;
 						char curr_char = c;
-						//space
-						if (curr_char==' '){
-							return ' ';
-						}
 						//upper case
 						if (ascci_code<91 && ascci_code > 64){
 							ascci_code-=65;
-							ascci_code+= -key;
-							ascci_code%=26; ascci_code +=65;
+							ascci_code+=(-key);
+							while(ascci_code<0){
+								ascci_code += 26;
+							}
+							ascci_code +=65;
 							curr_char = ascci_code;
 						}
 						//lower case
 						else if (ascci_code>96 && ascci_code<123){
 							ascci_code -= 97;
-							ascci_code += -key;
-							ascci_code%=26; ascci_code +=97;
+							ascci_code += (-key);
+							while(ascci_code < 0){
+								ascci_code += 26;
+							}
+							ascci_code +=97;
 							curr_char = ascci_code;
 						}
 						return curr_char;
