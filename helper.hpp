@@ -3,6 +3,7 @@
 #include<sstream>
 #include<iterator>
 #include<iostream>
+#include<algorithm>
 #include<bitset>
 #include<vector>
 namespace mhlzol004{

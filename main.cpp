@@ -88,7 +88,13 @@ int main(int args, char** argv){
 	}
 	else if (cipher=="ceaser"){
 		mhlzol004::crypt<Ceaser,bool,bool> enigma(parser.get_key<int>());
-
+		//enable/disable pack/grouping
+		if (enable_packing>0){
+			crypt_trait<Ceaser>::pack = true;
+		}
+		if (enable_grouping>0){
+			crypt_trait<Ceaser>::group = true;
+		}
 		//if input filename has not provided
 		if (parser.input_file()<1){
 			in = &std::cin;
@@ -125,7 +131,13 @@ int main(int args, char** argv){
 	}
 	else if (cipher=="vignere"){
 		mhlzol004::crypt<Vignere,bool,bool> enigma(parser.get_key<std::string>());
-
+		//enable/disable pack/grouping
+		if (enable_packing>0){
+			crypt_trait<Vignere>::pack = true;
+		}
+		if (enable_grouping>0){
+			crypt_trait<Vignere>::group = true;
+		}
 		//if input filename has not provided
 		if (parser.input_file()<1){
 			in = &std::cin;
@@ -141,7 +153,7 @@ int main(int args, char** argv){
 		}
 
 		//if input filename has not provided
-		if (parser.output_file()){
+		if (parser.output_file()<1){
 			out = &std::cout;
 		}
 		else{

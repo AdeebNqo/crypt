@@ -13,6 +13,6 @@ run:
 cmdline_parser.o: cmdline_parser.cpp
 	@g++ -std=c++11 cmdline_parser.cpp -c
 helper.o: helper.cpp
-	@g++ helper.cpp -c
+	@g++ -std=c++11 helper.cpp -c
 clean:
 	@rm -f $(app_name) $(objects)

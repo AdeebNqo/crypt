@@ -21,7 +21,6 @@ namespace mhlzol004{
 	template<typename C, class P, class G>
 	class crypt{
 		public:
-			std::ostream* output_ptr;
 			typedef typename crypt_trait<C>::key_value_t T; //getting the appropriate type for the key
 			T crypt_key; //defining the key with the Cipher specific type
 			/*
@@ -34,24 +33,33 @@ namespace mhlzol004{
 				crypt_trait<C>::key = x;
 			};
 			~crypt(){
-				output_ptr->flush();	
 			};
 			void encode(std::istream &in, std::ostream &out){
-				output_ptr = &out;
 				std::stringstream new_in;
+				int grouped_packed = 0;
 				//grouping
 				if (crypt_trait<C>::group){
+					std::cout << "grouping some ish" <<std::endl;
 					group(in, new_in);
+					grouped_packed = 1;
 				}
 				//packing
 				if (crypt_trait<C>::pack){
+					std::cout << "packing some ish" << std::endl;
 					pack(new_in, new_in);
+					grouped_packed = 1;
 				}
 				//encode
-				crypt_policy<C,P,G>::encode(in,out);
+				if (grouped_packed){
+					crypt_policy<C,P,G>::encode(new_in,out);
+				}
+				else{
+					crypt_policy<C,P,G>::encode(in,out);
+				}
+				out.flush();
 			};
 			void decode(std::istream &in, std::ostream &out){
-				crypt_policy<C,P,G>::encode(in,out);
+				crypt_policy<C,P,G>::decode(in,out);
 			};
 	};
 }

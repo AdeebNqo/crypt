@@ -32,7 +32,6 @@ namespace mhlzol004{
 	class crypt_policy<Ceaser,P,G>{
 		public:
 			static void encode(std::istream &in, std::ostream &out){
-
 				std::istream_iterator<char> end;
 				std::istream_iterator<char> curr_pos(in);
 				std::ostream_iterator<char> output(out, "");

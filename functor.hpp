@@ -205,7 +205,8 @@ namespace mhlzol004{
 	/*
 	xor_it
 	Functor for the xor cipher
-	
+	-deprecated--
+	I used lambdas
 	*/
 	class xor_it{
 		public:

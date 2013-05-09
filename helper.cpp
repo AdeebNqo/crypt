@@ -76,6 +76,10 @@ namespace mhlzol004{
 			bytes.push_back(new_char);
 			++curr_pos;
 		}
-		std::copy(bytes.rbegin(), bytes.rend(), out_it);
+		std::for_each(bytes.rbegin(), bytes.rend(), 
+			[&out](char &param){
+				out << param;
+			}
+		);
 	}
 }
