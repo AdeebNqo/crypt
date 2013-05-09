@@ -69,3 +69,18 @@ The spec also states that:
         
 This is refering to lambdas and functors. I have a file named `functor.hpp`.
 This file contains all functors I have used (and not used). The lambdas can be found in `crypt_policy.hpp`
+
+List of files
+---------------
+
+- main.cpp
+- cipher.hpp  [This only stores studs for the classes, they are only needed for their types]
+- crypt.hpp [Main class for the crypt program]
+- crypt_trait.hpp
+- crypt_policy.hpp 
+- functor.hpp [File for the used and unused functors]
+- Makefile
+- README.md
+- cmdline_parser.cpp (cmdline_parser.h)
+- helper.cpp(helper.hpp) [All helper methods such group() are found here]
+- printVigMatrix.java [Helper class for printing the vignere cipher matrix, added this because it looks cool]
